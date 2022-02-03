@@ -1,0 +1,31 @@
+#include <LiquidCrystal_I2C.h>
+
+#define LDR_PIN 2
+
+LiquidCrystal_I2C lcd(0x27, 20, 4);
+
+void setup() {
+  pinMode(11, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(LDR_PIN, INPUT);
+  lcd.init();
+  lcd.backlight();
+}
+
+void loop() {
+  lcd.setCursor(2, 0);
+  lcd.print("Room: ");
+  if (digitalRead(LDR_PIN) == LOW) {
+    lcd.print("Light!");
+    digitalWrite(12, HIGH);
+    digitalWrite(11, HIGH);
+  } 
+  else
+  
+  {
+    lcd.print("Dark  ");
+    digitalWrite(12, LOW);
+    digitalWrite(11, LOW);
+  }
+  delay(100);
+}
